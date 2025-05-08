@@ -1,3 +1,23 @@
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+});
+
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+});
+
+backToTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
 // Auto-type
 var typed = new Typed('.auto-typed', {
   strings: ["an Analyst.", "a Programmer.", "a Writter.","a UI Designer."],
