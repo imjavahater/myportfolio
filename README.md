@@ -8,21 +8,21 @@ Explore the live portfolio website: [Portfolio Link](https://imjavahater.github.
 ---
 
 ## 🛠️ Tech Stack & Skills
-* **Languages & Frameworks:** HTML5, CSS3, JavaScript, React, Node.js, Express, Sass, Python, VB.NET[cite: 1]
-* **Databases:** MSSQL, MongoDB[cite: 1]
-* **Tools & Analytics:** Tableau, Power BI, SQL, Excel, VS Code, Git & GitHub[cite: 1]
+* **Languages & Frameworks:** HTML5, CSS3, JavaScript, React, Node.js, Express, Sass, Python, VB.NET
+* **Databases:** MSSQL, MongoDB
+* **Tools & Analytics:** Tableau, Power BI, SQL, Excel, VS Code, Git & GitHub
 
 ---
 
 ## ✨ Features
 * **Interactive UI/UX:** Features a dynamic text auto-typer and a responsive mobile navigation drawer.
-* **Dark/Light Theme Toggle:** Supports seamless switching between dark and light modes with state retention via `localStorage`[cite: 1, 3].
-* **Interactive Projects Showcase:** Quick links to various web applications and tools[cite: 1, 3]:
-  * *Quote Generator*[cite: 1]
-  * *KENDRYPTO (Crypto Web App)*[cite: 1]
-  * *Color Flipper*[cite: 1]
-  * *Infinite Scroll API*[cite: 1]
-* **Contact Form:** Integrated with Formspree for direct messaging alongside links to professional and social channels[cite: 1, 3].
+* **Dark/Light Theme Toggle:** Supports seamless switching between dark and light modes with state retention via `localStorage`.
+* **Interactive Projects Showcase:** Quick links to various web applications and tools
+  * *Quote Generator*
+  * *KENDRYPTO (Crypto Web App)*
+  * *Color Flipper*
+  * *Infinite Scroll API*
+* **Contact Form:** Integrated with Formspree for direct messaging alongside links to professional and social channels.
 
 ---
 
