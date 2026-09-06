@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Portfolio of Kennard Troy Sanchez, showcasing web development, data analysis, and programming projects.">
-
+    <meta name="description" content="Kennard Troy Sanchez — Analyst and self-taught developer. Experience across O2C billing, workforce analytics, and equity research, plus JavaScript/Python side projects.">
+    <script>
+      (function () {
+        var saved = localStorage.getItem('kts-theme');
+        var wantsLight = saved ? saved === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (wantsLight) document.documentElement.setAttribute('data-theme', 'light');
+      })();
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mobile.css">
     <link
@@ -13,60 +19,117 @@
   /><link 
   href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" 
   rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="icon" href="images/k.png">
-  
+
     <title>KTS | Portfolio</title>
 </head>
 <body>
     <!-- Header -->
     <header class="head" id="portfolio">
-
-        <div class="nav-container"> 
+        <div class="nav-container">
         <nav>
             <div class="logo-wrap slide-left">
               <a href="#portfolio" class="logo">KENNARDTROY</a>
             </div>
-            
-            <ul class="nav-ul slide-right">
-              <li class="nav-li"><a href="#about" class="nav-a">about</a></li>
-              <li class="nav-li"><a href="#skills" class="nav-a">skills</a></li>
-              <li class="nav-li"><a href="#portfolios" class="nav-a">portfolio</a></li>
-              <li class="nav-li"><a href="#contact" class="nav-a">contact</a></li>
-            </ul>
-            
-
+            <div class="nav-right">
+              <ul class="nav-ul slide-right">
+                <li class="nav-li"><a href="#about" class="nav-a">about</a></li>
+                <li class="nav-li"><a href="#experience" class="nav-a">experience</a></li>
+                <li class="nav-li"><a href="#skills" class="nav-a">skills</a></li>
+                <li class="nav-li"><a href="#portfolios" class="nav-a">portfolio</a></li>
+                <li class="nav-li"><a href="#contact" class="nav-a">contact</a></li>
+              </ul>
+              <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+                <i class="ri-moon-line" id="themeIcon"></i>
+              </button>
+            </div>
             <div class="hamburger">
-                
               <span class="bar"></span>
               <span class="bar"></span>
               <span class="bar"></span>
             </div>
           </nav>
         </div>
-    </div>
     </header>
     <!-- About -->
     <section class="container-about">
         <span class="blur"></span>
         <span class="blur"></span>
         <div class="split">
-            <div class="container-left">
+            <div class="container-left reveal">
                 <h1 class="h1"><span class="span-name">KENNARD TROY</span> SANCHEZ</h1>
                 <h2 class="h2">I'm <span class="auto-typed atype"></span></h2>
                 <p class="about-life">
                     Greetings! I'm a passionate self-taught programmer hailing from the vibrant city of Manila in the Philippines. My programming journey began with JavaScript and has since evolved to encompass an array of its associated frameworks, including Node.js, Express, and React. In parallel, I've delved into the world of Python programming, constantly enriching my knowledge and skills.
 <br>
 Below, you'll find a comprehensive list of the technologies I'm proficient in, along with some notable projects that showcase my capabilities.</p>
-                <button class="btn"><a href="LKennardtroyCV_2025.03.pdf" download="LKennardtroyCV_2025.03.pdf" class="btn">DOWNLOAD CV</a>
-                </button>
-                
+                <a class="btn" href="assets/Kennard_Troy_Sanchez_CV.pdf" download="Kennard_Troy_Sanchez_CV.pdf">DOWNLOAD CV</a>
             </div>
             <div class="container-right split">
                 <div class="about-image">
-                    <img src="images/ken2.jpg" class="picKo">
+                    <img src="images/ken2.jpg" class="picKo" alt="Kennard Troy Sanchez">
             </div>
         </div>
     </div>
+    </section>
+    <!-- Experience -->
+    <section class="experience" id="experience">
+        <div class="title-skill">
+            <h2 class="name-skill">EXPERIENCE</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">Current</span>
+                    <h4 class="timeline-role">Senior Finance Admin Assistant</h4>
+                    <p class="timeline-company">UPS</p>
+                    <ul class="timeline-list">
+                        <li>Handling manual billing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">Sept 2025 – Feb 2026</span>
+                    <h4 class="timeline-role">Customer Service Representative </h4>
+                    <p class="timeline-company">International Flavors &amp; Fragrances</p>
+                    <ul class="timeline-list">
+                        <li>Managed end-to-end Order to Cash for B2B domestic, export, and consignment orders — sales order entry, invoicing, and delivery follow-up.</li>
+                        <li>Coordinated customer escalations and disputes (credits, debits, returns) with logistics and 3PL/4PL partners.</li>
+                        <li>Maintained SOX and FSSC 22000 audit compliance while working across a multicultural, cross-functional team.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">Jul 2024 – May 2025</span>
+                    <h4 class="timeline-role">Senior Representative, Real-Time Analytics Management</h4>
+                    <p class="timeline-company">Concentrix</p>
+                    <ul class="timeline-list">
+                        <li>Supported workforce management for a US insurance client — scheduling, real-time monitoring, and manpower allocation.</li>
+                        <li>Built KPI/CSAT dashboards and attendance reporting for stakeholders using SQL, Excel, and Power BI.</li>
+                        <li>Ran root-cause analysis on operational issues and drove process documentation improvements.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">Apr 2023 – Jan 2024</span>
+                    <h4 class="timeline-role">Research Analyst (Hybrid)</h4>
+                    <p class="timeline-company">FactSet Research Systems</p>
+                    <ul class="timeline-list">
+                        <li>Analyzed public and private companies globally, maintaining accurate Business Industry Classification data.</li>
+                        <li>Mapped supply chain relationships and geographic revenue from financial statements and annual reports.</li>
+                        <li>Built entity structure charts, revenue comparisons, and time-series models for the research team.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- skills -->
     <section class="skill-container" id="skills">
@@ -74,41 +137,44 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
             <h2 class="name-skill">PROFESSIONAL SKILL</h2>
         </div>
         <div class="skill-set">
-            <div class="prog-title">
-                <h4 id="skill-h4">Programming Languages</h4>
+            <div class="skill-category reveal">
+                <h4 class="skill-h4">Programming Languages</h4>
                 <div class="programming">
                     <div class="prog-list">
                         <div>
-                            <img src="images/CSS3_logo_and_wordmark.svg.png" class="prog-img">
-                            <img src="images/html.png" class="prog-img">
-                            <img src="images/javascript-1.svg" class="prog-img">
-                            <img src="images/React-icon.svg.png" class="prog-img">
+                            <img src="images/CSS3_logo_and_wordmark.svg.png" class="prog-img" alt="CSS3">
+                            <img src="images/html.png" class="prog-img" alt="HTML5">
+                            <img src="images/javascript-1.svg" class="prog-img" alt="JavaScript">
+                            <img src="images/React-icon.svg.png" class="prog-img" alt="React">
                         </div>
                         <div>
-                            <img src="images/node-js-javascript-web-application-express-js-computer-software-others.jpg" class="prog-img">
+                            <img src="images/node-js-javascript-web-application-express-js-computer-software-others.jpg" class="prog-img" alt="Node.js">
                             <img src="images/Python-logo-notext.svg.png" 
-                            class="prog-img">
-                            <img src="images/sass.png" class="prog-img">
-                            <img src="images/VB.NET_Logo.svg.png" class="prog-img">
+                            class="prog-img" alt="Python">
+                            <img src="images/sass.png" class="prog-img" alt="Sass">
+                            <img src="images/VB.NET_Logo.svg.png" class="prog-img" alt="VB.NET">
                         </div>
                     </div>
                 </div>
-                </ul>
             </div>
-            <div>
-                <h4 id="skill-h4">Databases</h4>
-                <div>
-                    <img src="images/mssql.jpg" class="prog-img">
-                    <img src="images/mongodb.png" class="prog-img">
+            <div class="skill-category reveal">
+                <h4 class="skill-h4">Databases</h4>
+                <div class="prog-list">
+                    <div>
+                        <img src="images/mssql.jpg" class="prog-img" alt="MSSQL">
+                        <img src="images/mongodb.png" class="prog-img" alt="MongoDB">
+                    </div>
                 </div>
             </div>
-            <div>
-                <h4 id="skill-h4">Others</h4>
-                <div>
-                    <img src="images/Tableau-Symbol.png" 
-                    class="prog-img">
-                    <img src="images/vsc.png" class="prog-img">
-                    <img src="images/GitHub_Invertocat_Logo.svg" class="prog-img">
+            <div class="skill-category reveal">
+                <h4 class="skill-h4">Others</h4>
+                <div class="prog-list">
+                    <div>
+                        <img src="images/Tableau-Symbol.png" 
+                        class="prog-img" alt="Tableau">
+                        <img src="images/vsc.png" class="prog-img" alt="VS Code">
+                        <img src="images/GitHub_Invertocat_Logo.svg" class="prog-img" alt="GitHub">
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,37 +183,45 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
     <section id="portfolios" class="portfolio">
         <h2 class="name-skill">PORTFOLIO</h2>
         <div class="port-content">
-            <div class="port-card">
-                <span><i class="ri-money-dollar-box-line"></i></span>
+            <div class="port-card reveal">
+                <span><i class="ri-double-quotes-l"></i></span>
                 <h4>Quote Generator</h4>
                 <p>
                     A Basic Quote Generator. Using, HTML, CSS, and Javascript. 
                 </p>
-                <button class="btn-small" id="quote">Click here</i></button>
+                <button class="btn-small" id="quote">Click here</button>
             </div>
-            <div class="port-card">
-                <span><i class="ri-bug-line"></i></span>
+            <div class="port-card reveal">
+                <span><i class="ri-bit-coin-line"></i></span>
                 <h4>KENDRYPTO</h4>
                 <p>
                     Interactive Crypto website. It has Basic Burger function and slide effects. 
                 </p>
                 <button class="btn-small" id="crypto">Click here</button>
             </div>
-            <div class="port-card">
-                <span><i class="ri-history-line"></i></span>
+            <div class="port-card reveal">
+                <span><i class="ri-palette-line"></i></span>
                 <h4>Color Flipper</h4>
                 <p>
                     An Functional Website that changes the background color. 
                 </p>
                 <button class="btn-small" id="col-flip">Click here</button>
             </div>
-            <div class="port-card">
-                <span><i class="ri-shake-hands-line"></i></span>
+            <div class="port-card reveal">
+                <span><i class="ri-loop-right-line"></i></span>
                 <h4>Infinite scroll API</h4>
                 <p>
                     API linked website shows random awesome images.  
                 </p>
                 <button class="btn-small" id="infi-scroll">Click here</button>
+            </div>
+            <div class="port-card reveal">
+                <span><i class="ri-loop-right-line"></i></span>
+                <h4>RPS Game</h4>
+                <p>
+                    Interactive Rock-Paper-Scissor Game embedded in HTML with small javascipt code. 
+                </p>
+                <button class="btn-small" id="rps-game">Click here</button>
             </div>
         </div>
     </section>
@@ -155,48 +229,77 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
     <!-- Contact Me -->
     <section id="contact">
         <h1 class="name-skill">CONTACT</h1>
-        <div class="contact-info-upper-container">
-          <div class="contact-info-container">
-            <img
-              src="images/email.png"
-              alt="Email icon"
-              class="icon contact-icon email-icon"
-            />
-            <p>sanchezkent46@gmail.com</p>
-          </div>
-          <div class="contact-info-container">
-            <img
-              src="images/linkedin.png"
-              alt="LinkedIn icon"
-              class="icon contact-icon email-icon"
-            />
-            <p id="linkedin">LinkedIn</p>
-          </div>
-          <div class="contact-info-container">
-            <img
-              src="images/medium.png"
-              alt="Medium icon"
-              class="icon contact-icon email-icon"
-            />
-            <p id="medium">Medium</p>
-          </div>
-          <div class="contact-info-container">
-            <img
-              src="images/GitHub_Invertocat_Logo.svg"
-              alt="github icon"
-              class="icon contact-icon email-icon"
-            />
-            <p id="github">GitHub</p>
-          </div>
+        <div class="contact-wrap">
+            <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-row">
+                    <label for="cf-name">Name</label>
+                    <input type="text" id="cf-name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <label for="cf-email">Email</label>
+                    <input type="email" id="cf-email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label for="cf-message">Message</label>
+                    <textarea id="cf-message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn" id="cf-submit">SEND MESSAGE</button>
+                <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+            <div class="contact-info-upper-container reveal">
+              <div class="contact-info-container">
+                <img
+                  src="images/email.png"
+                  alt="Email icon"
+                  class="icon contact-icon email-icon"
+                />
+                <a href="mailto:sanchez.kent0411@gmail.com"><p>sanchez.kent0411@gmail.com</p></a>
+              </div>
+              <div class="contact-info-container">
+                <img
+                  src="images/linkedin.png"
+                  alt="LinkedIn icon"
+                  class="icon contact-icon email-icon"
+                />
+                <p id="linkedin">LinkedIn</p>
+              </div>
+              <div class="contact-info-container">
+                <img
+                  src="images/medium.png"
+                  alt="Medium icon"
+                  class="icon contact-icon email-icon"
+                />
+                <p id="medium">Medium</p>
+              </div>
+              <div class="contact-info-container">
+                <img
+                  src="images/GitHub_Invertocat_Logo.svg"
+                  alt="github icon"
+                  class="icon contact-icon email-icon"
+                />
+                <p id="github">GitHub</p>
+              </div>
+              <div class="contact-info-container">
+                <i class="ri-facebook-circle-fill icon contact-icon contact-icon-font"></i>
+                <p id="facebook">Facebook</p>
+              </div>
+              <div class="contact-info-container">
+                <i class="ri-instagram-fill icon contact-icon contact-icon-font"></i>
+                <p id="instagram">Instagram</p>
+              </div>
+            </div>
         </div>
     </section>
 
-    <button id="backToTop" class="btn-small">Scroll Up</button>
-
     <!-- Footer -->
     <footer class="footer">
-        <p class="foot">© 2024 Kennard Troy Sanchez | Made with ❤️ in the Philippines</p>
+        <p class="foot">All Rights Reserved. Kennard Troy Sanchez © <span id="year"></span></p>
     </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
   <script src="script.js"></script>
