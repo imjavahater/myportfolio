@@ -3,7 +3,7 @@
 A personal portfolio website showcasing my background as an analyst and developer, built with clean HTML, CSS, and JavaScript.
 
 ## 🚀 Live Preview
-Explore the live portfolio website: [Portfolio Link](https://imjavahater.github.io/)
+Explore the live portfolio website: [Portfolio Link](https://imjavahater.github.io/myportfolio/)
 
 ---
 
