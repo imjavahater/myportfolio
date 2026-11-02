@@ -1,7 +1,14 @@
-/* MEDIA QUERY */
+/* =========================================================
+   RESPONSIVE / MEDIA QUERIES
+   Breakpoints:
+     ≤ 799px   phones & small tablets  -> hamburger menu
+     800-1199  tablets & small laptops -> inline menu, compact
+     ≥ 1200px  desktop                 -> full-size menu
+   ========================================================= */
 
+/* ---------- Tablet & desktop (inline navigation) ---------- */
 @media (min-width: 800px) {
-  
+
     /* NAVBAR */
     .hamburger {
       display: none;
@@ -10,6 +17,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1.5rem;
     }
     .nav-right {
       display: flex;
@@ -19,18 +27,23 @@
       position: static;
       flex-direction: row;
       background-color: transparent;
-      height: 100%;
-      justify-content: flex-end; 
+      height: auto;
+      justify-content: flex-end;
+      transition: none;
     }
     .nav-li {
-      font-size: 1.5rem;
-      margin-left: 2em;
+      font-size: 1.15rem;
+      margin-left: 1.25em;
+      white-space: nowrap;
+    }
+    .logo {
+      font-size: 1.75rem;
     }
     .nav-a {
       position: relative;
     }
     .nav-a::before {
-      content:'';
+      content: '';
       width: 0%;
       position: absolute;
       height: 3px;
@@ -38,53 +51,119 @@
       bottom: -2px;
       transition: 0.3s ease;
     }
-    .nav-a:hover::before {
-       width: 100%; 
+    .nav-a:hover::before,
+    .nav-a:focus-visible::before {
+       width: 100%;
     }
     .theme-toggle {
       position: static;
       transform: none;
-      margin-left: 1.5em;
+      margin-left: 1.25em;
+      flex-shrink: 0;
     }
-      /* REUSEABLE */
- 
-  /* ABOUT ME */
-.split {
-    flex-direction: row;
-}
-.container-left {
-    width: 40%;
-}
 
-/* CONTACT */
-.contact-wrap {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-}
-.contact-form {
-    flex: 1;
-}
-.contact-info-upper-container {
-    flex: 1;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-}
-
-@media (max-width: 799px) {
-    .about-life {
-      text-align: left;
+    /* ABOUT ME */
+    .split {
+      flex-direction: row;
     }
-    .logo-wrap {
-      padding-right: 5.5rem;
+    .container-left {
+      width: 50%;
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .contact-form {
+      flex: 1;
+    }
+    .contact-info-upper-container {
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+}
+
+/* ---------- Full desktop: original larger sizes ---------- */
+@media (min-width: 1200px) {
+    .nav-li {
+      font-size: 1.5rem;
+      margin-left: 2em;
     }
     .logo {
-      font-size: 1.7rem;
+      font-size: 2.25rem;
+    }
+    .theme-toggle {
+      margin-left: 1.5em;
+    }
+    .container-left {
+      width: 40%;
+    }
+}
+
+/* ---------- Phones & small tablets ---------- */
+@media (max-width: 799px) {
+    /* Compact header that stays at the top while scrolling,
+       so the menu is always one tap away */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--nav-bg);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      transition: background-color .3s ease;
+    }
+    .nav-container {
+      padding: 0.25rem 0;
+    }
+    .logo-wrap {
+      text-align: left;
+      padding: 0.9rem 6.5rem 0.9rem 0; /* leave room for the toggle + burger */
+    }
+    .logo {
+      font-size: 1.5rem;
+    }
+    .theme-toggle {
+      right: 3.75rem;
+    }
+    .hamburger {
+      right: 0.5rem;
+    }
+    .nav-li {
+      font-size: 1.75rem;
+    }
+    .nav-a {
+      display: inline-block;
+      padding: 0.5rem 1.5rem; /* easy to tap */
+    }
+
+    /* Anchor links land below the sticky header, not under it */
+    section {
+      scroll-margin-top: 4.5rem;
+    }
+
+    .container-about {
+      padding: 2rem 1.25rem 3rem;
+    }
+    .about-life {
+      text-align: left;
+      line-height: 1.6;
+    }
+    .about-image {
+      max-width: 320px;
+    }
+    .experience,
+    .portfolio {
+      padding: 3rem 1.25rem;
+    }
+    #contact {
+      padding: 2rem 1.25rem 5rem;
     }
     .port-content {
-      grid-template-columns: repeat(2, 1fr);
+      margin-top: 2rem;
+      gap: 1.25rem;
     }
     .timeline {
       padding-left: 1.5rem;
@@ -92,23 +171,34 @@
     .timeline-marker {
       left: -1.95rem;
     }
+    .contact-form {
+      padding: 1.5rem 1.25rem;
+    }
+    .contact-form .btn {
+      align-self: stretch; /* full-width send button on phones */
+    }
+    .prog-img {
+      width: 64px;
+      height: 52px;
+      margin: 0.5rem 0;
+    }
 }
 
+/* ---------- Small phones ---------- */
 @media (max-width: 420px) {
-    .btn-wrap {
-      display: flex;
-      flex-direction: column;
-    }
     .btn {
-      margin-bottom: 1em;
-    }
-    .port-content {
-      grid-template-columns: repeat(1, 1fr);
+      display: block;
+      font-size: 1.05rem;
     }
     .theme-toggle {
-      right: 4em;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       font-size: 0.95rem;
     }
-  }
+    .contact-info-upper-container {
+      width: 100%;
+    }
+    .contact-label {
+      font-size: 1rem;
+    }
+}

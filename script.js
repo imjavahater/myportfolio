@@ -1,121 +1,103 @@
-// Auto-type
-var typed = new Typed('.auto-typed', {
-  strings: ["an Analyst.", "a Programmer.", "a Writer.", "a UI Designer."],
-  typeSpeed: 100,
-  backSpeed: 100,
-  loop: true
-  
+// =========================================================
+// Small helpers so the site never breaks if storage is blocked
+// (e.g. some private-browsing modes)
+// =========================================================
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
+}
+
+// =========================================================
+// AUTO-TYPE (Typed.js). If the library fails to load
+// (ad blocker, slow network), show plain text instead of crashing.
+// =========================================================
+const typedTarget = document.querySelector('.auto-typed');
+if (window.Typed && typedTarget) {
+  new Typed('.auto-typed', {
+    strings: ['an Analyst.', 'a Programmer.', 'a Writer.', 'a UI Designer.'],
+    typeSpeed: 100,
+    backSpeed: 100,
+    loop: true
+  });
+} else if (typedTarget) {
+  typedTarget.textContent = 'an Analyst.';
+}
+
+// =========================================================
+// MOBILE MENU (hamburger)
+// =========================================================
+const hamburger = document.querySelector('.hamburger');
+const navUl = document.querySelector('.nav-ul');
+
+function setMenu(open) {
+  hamburger.classList.toggle('active', open);
+  navUl.classList.toggle('active', open);
+  document.body.classList.toggle('menu-open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
+hamburger.addEventListener('click', function () {
+  setMenu(!navUl.classList.contains('active'));
 });
 
-// Burger
-const hamburger = document.querySelector(".hamburger");
-const navUl = document.querySelector(".nav-ul");
-
-hamburger.addEventListener("click", function () {
-  hamburger.classList.toggle("active");
-  navUl.classList.toggle("active");
+// Close the menu after tapping a link
+navUl.querySelectorAll('a').forEach(function (link) {
+  link.addEventListener('click', function () { setMenu(false); });
 });
 
-// PORTFOLIO
-const quotebtn = document.getElementById('quote');
-const cryptoBtn = document.getElementById('crypto');
-const colFlipBtn = document.getElementById('col-flip');
-const infiBtn = document.getElementById('infi-scroll');
-const rpsgame = document.getElementById('rps-game');
+// Close with the Escape key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && navUl.classList.contains('active')) {
+    setMenu(false);
+    hamburger.focus();
+  }
+});
 
-function quoteken() {
-  const quoteUrl = `https://imjavahater.github.io/kntquotegen.github.io/`;
-  window.open(quoteUrl);
-}
-function cryptoken() {
-  const cryptoUrl = `https://imjavahater.github.io/interactive-crypto-web/`;
-  window.open(cryptoUrl);
-}
-function colFlipken() {
-  const quoteUrl = `https://imjavahater.github.io/color-flipper/`;
-  window.open(quoteUrl);
-}
-function infiken() {
-  const quoteUrl = `https://imjavahater.github.io/js-infnt-scrl/`;
-  window.open(quoteUrl);
-}
-function rockpapersci() {
-  const quoteUrl = `https://imjavahater.github.io/RPS---Game/`;
-  window.open(quoteUrl);
-}
-quotebtn.addEventListener('click', quoteken);
-cryptoBtn.addEventListener('click', cryptoken);
-colFlipBtn.addEventListener('click', colFlipken);
-infiBtn.addEventListener('click', infiken);
-rpsgame.addEventListener('click', rockpapersci);
+// If the screen is rotated / resized to desktop width, reset the menu
+window.matchMedia('(min-width: 800px)').addEventListener('change', function (e) {
+  if (e.matches) setMenu(false);
+});
 
+// Portfolio + contact links are now normal <a href> links in index.html,
+// so they no longer need JavaScript to open.
 
-
-
-// Contact button
-const linkedinbtn = document.getElementById('linkedin');
-const githubbtn = document.getElementById('github');
-const mediumbtn = document.getElementById('medium');
-
-function linkedinken() {
-  const linkedinUrl = `https://www.linkedin.com/in/ktsanchez/`;
-  window.open(linkedinUrl);
-}
-function githubken() {
-  const githubUrl = `https://github.com/imjavahater`;
-  window.open(githubUrl);
-}
-function mediumken() {
-  const mediumUrl = `https://medium.com/@troysanchez`;
-  window.open(mediumUrl);
-}
-
-linkedinbtn.addEventListener('click', linkedinken);
-githubbtn.addEventListener('click', githubken);
-mediumbtn.addEventListener('click', mediumken);
-
-const facebookbtn = document.getElementById('facebook');
-const instagrambtn = document.getElementById('instagram');
-
-function facebookken() {
-  const facebookUrl = `https://www.facebook.com/fghjkenl/`;
-  window.open(facebookUrl);
-}
-function instagramken() {
-  const instagramUrl = `https://www.instagram.com/ysk_kenn/`;
-  window.open(instagramUrl);
-}
-
-facebookbtn.addEventListener('click', facebookken);
-instagrambtn.addEventListener('click', instagramken);
-
-// THEME TOGGLE (dark / light, remembered via localStorage)
+// =========================================================
+// THEME TOGGLE (dark / light, remembered between visits)
+// =========================================================
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const rootEl = document.documentElement;
+const themeColorMeta = document.querySelectorAll('meta[name="theme-color"]');
 
 function applyTheme(theme) {
-  if (theme === 'light') {
+  const isLight = theme === 'light';
+  if (isLight) {
     rootEl.setAttribute('data-theme', 'light');
-    themeIcon.className = 'ri-sun-line';
   } else {
     rootEl.removeAttribute('data-theme');
-    themeIcon.className = 'ri-moon-line';
   }
+  themeIcon.className = isLight ? 'ri-sun-line' : 'ri-moon-line';
+  // Keep the phone's browser bar the same color as the header
+  themeColorMeta.forEach(function (m) {
+    m.setAttribute('content', isLight ? '#ffffff' : '#0c1c55');
+  });
 }
 
-const savedTheme = localStorage.getItem('kts-theme');
 const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-applyTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
+applyTheme(safeGet('kts-theme') || (prefersLight ? 'light' : 'dark'));
 
 themeToggle.addEventListener('click', function () {
-  const isLight = rootEl.getAttribute('data-theme') === 'light';
-  const next = isLight ? 'dark' : 'light';
+  const next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
   applyTheme(next);
-  localStorage.setItem('kts-theme', next);
+  safeSet('kts-theme', next);
 });
 
+// =========================================================
 // SCROLL REVEAL
+// =========================================================
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(function (entries) {
@@ -131,39 +113,55 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach(function (el) { el.classList.add('visible'); });
 }
 
+// =========================================================
 // BACK TO TOP
+// =========================================================
 const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', function () {
-  if (window.scrollY > 400) {
-    backToTop.classList.add('visible');
-  } else {
-    backToTop.classList.remove('visible');
-  }
-});
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true }); // passive = smoother scrolling on phones
+
 backToTop.addEventListener('click', function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// =========================================================
 // FOOTER YEAR
+// =========================================================
 const yearEl = document.getElementById('year');
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// CONTACT FORM (Formspree — swap in your own form ID, see notes)
+// =========================================================
+// CONTACT FORM (Formspree)
+// Until you add a real Formspree ID in index.html, the form falls
+// back to opening the visitor's email app with the message filled in.
+// =========================================================
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
+const MY_EMAIL = 'sanchez.kent0411@gmail.com';
+
 if (contactForm) {
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const submitBtn = document.getElementById('cf-submit');
+    const data = new FormData(contactForm);
+
+    if (contactForm.action.indexOf('YOUR_FORM_ID') !== -1) {
+      const subject = encodeURIComponent('Portfolio message from ' + data.get('name'));
+      const body = encodeURIComponent(data.get('message') + '\n\n— ' + data.get('name') + ' (' + data.get('email') + ')');
+      window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + subject + '&body=' + body;
+      return;
+    }
+
     submitBtn.disabled = true;
     formStatus.textContent = 'Sending...';
     formStatus.className = 'form-status';
 
     fetch(contactForm.action, {
       method: 'POST',
-      body: new FormData(contactForm),
+      body: data,
       headers: { 'Accept': 'application/json' }
     })
       .then(function (response) {
@@ -172,12 +170,11 @@ if (contactForm) {
           formStatus.className = 'form-status success';
           contactForm.reset();
         } else {
-          formStatus.textContent = 'Something went wrong — please email me directly instead.';
-          formStatus.className = 'form-status error';
+          throw new Error('Bad response');
         }
       })
       .catch(function () {
-        formStatus.textContent = 'Something went wrong — please email me directly instead.';
+        formStatus.textContent = 'Something went wrong — please email me directly at ' + MY_EMAIL + '.';
         formStatus.className = 'form-status error';
       })
       .finally(function () {
