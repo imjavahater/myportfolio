@@ -3,76 +3,1012 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KTS | Portfolio</title>
     <meta name="description" content="Kennard Troy Sanchez — Analyst and self-taught developer. Experience across O2C billing, workforce analytics, and equity research, plus JavaScript/Python side projects.">
+
+    <!-- Colors the phone's browser bar to match the site -->
+    <meta name="theme-color" content="#0c1c55" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+    <!-- Link previews when the site is shared on LinkedIn / Messenger / Slack -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kennard Troy Sanchez | Portfolio">
+    <meta property="og:description" content="Analyst and self-taught developer — O2C billing, workforce analytics, equity research, and JavaScript/Python projects.">
+    <!-- TODO: once the site is live, add a full URL to a 1200x630 preview image:
+    <meta property="og:image" content="https://YOUR-SITE/images/og-preview.jpg"> -->
+
     <script>
+      // Runs before the page paints so there is no light/dark "flash".
+      document.documentElement.classList.add('js');
       (function () {
-        var saved = localStorage.getItem('kts-theme');
+        var saved = null;
+        try { saved = localStorage.getItem('kts-theme'); } catch (e) {}
         var wantsLight = saved ? saved === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches;
         if (wantsLight) document.documentElement.setAttribute('data-theme', 'light');
       })();
     </script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mobile.css">
-    <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  /><link 
-  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" 
-  rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="icon" href="images/k.png">
 
-    <title>KTS | Portfolio</title>
+    <!-- Fonts: one request, only the weights actually used -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+/* Fonts are loaded in index.html (one request, faster than @import) */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* THEME VARIABLES */
+:root {
+  --bg-1: #4da4c2;
+  --bg-2: #2881ab;
+  --bg-3: #085e92;
+  --bg-4: #023d75;
+  --bg-5: #0c1c55;
+  --text-primary: #ffffff;
+  --text-muted: #cccccc;
+  --accent: #f6a020;
+  --accent-line: #cc8c2d;
+  --nav-bg: #0c1c55;
+  --card-bg: #7f7fd6;
+  --card-hover-bg: #323232;
+  --card-hover-border: #ffffff;
+  --badge-bg: #1e40af;
+  --btn-bg: #7f7fd6;
+  --btn-hover: #1e40af;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-border: rgba(163, 163, 163, 1);
+  --glow: #1d4ed8;
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 255, 255, 0.25);
+  --input-text: #ffffff;
+  --foot-color: rgb(162, 196, 237);
+  --success: #4ade80;
+  --error: #f87171;
+  --card-shadow: none;
+}
+
+[data-theme="light"] {
+  --bg-1: #eaf6ff;
+  --bg-2: #dcecfb;
+  --bg-3: #cfe3f7;
+  --bg-4: #e8effa;
+  --bg-5: #ffffff;
+  --text-primary: #0c1c55;
+  --text-muted: #4a5568;
+  --accent: #d9790a;
+  --accent-line: #b56f1f;
+  --nav-bg: #ffffff;
+  --card-bg: #f5f8fd;
+  --card-hover-bg: #eef2ff;
+  --card-hover-border: #1d4ed8;
+  --badge-bg: #1d4ed8;
+  --btn-bg: #1d4ed8;
+  --btn-hover: #0c1c55;
+  --surface: rgba(12, 28, 85, 0.04);
+  --surface-border: rgba(12, 28, 85, 0.18);
+  --glow: #93c5fd;
+  --input-bg: #ffffff;
+  --input-border: rgba(12, 28, 85, 0.25);
+  --input-text: #0c1c55;
+  --foot-color: #45536b;
+  --success: #16a34a;
+  --error: #dc2626;
+  --card-shadow: 0 10px 30px -18px rgba(12, 28, 85, 0.35);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif; /* default font, so nothing falls back to Times */
+    overflow-x: clip; /* safety net: nothing can cause sideways scrolling on phones */
+    -webkit-text-size-adjust: 100%;
+    background: #000;
+    background-image: linear-gradient(to left top, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-4), var(--bg-5));
+  }
+  li {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    user-select: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  
+/* Stop the page scrolling behind the open mobile menu */
+body.menu-open {
+    overflow: hidden;
+}
+
+  /* Navigation Bar */
+header {
+    position: relative;
+    font-family: "Outfit", sans-serif;
+  }
+.logo-wrap {
+    text-align: center;
+    padding: 3rem 0;
+  }
+  
+.logo {
+    font-size: 2.25rem;
+    color: var(--text-primary);
+    font-family: "Outfit", sans-serif;
+    font-weight: bold;
+    transition: color .3s ease;
+  }
+  
+.logo:hover {
+    color: var(--accent);
+  }
+.nav-ul {
+    position: fixed;
+    top: 0;
+    left:-100%;
+    background-color:  var(--nav-bg);
+    width: 100%;
+    height: 100vh;
+    height: 100dvh; /* mobile: ignores the browser's address bar */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: 0.5s ease, background-color .3s ease;
+  }
+  
+.nav-li {
+    font-size: 2rem;
+  }
+.nav-ul.active {
+    left: 0;
+    overflow: hidden;
+    z-index: 3;
+  }
+  
+.nav-a {
+    color: var(--text-primary);
+  }
+.hamburger {
+    cursor: pointer;
+    display: block;
+    background: none;
+    padding: 0.5rem;   /* bigger tap target (~44px) */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1em;
+    z-index: 4;
+  }
+  
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-primary);
+  }
+  /* ANIMATIONS */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+/* THEME TOGGLE */
+.theme-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4.5em;
+    z-index: 4;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--surface);
+    border: 1px solid var(--surface-border);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color .3s ease, border-color .3s ease, background-color .3s ease;
+  }
+.theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ABOUT ME CONTAINER*/
+
+.container-about {
+    max-width: 1200px;
+    margin: auto;
+    padding: 5rem 2rem;
+    position: relative;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+.blur{
+    position: absolute;
+    box-shadow: 0 0 1000px 50px var(--glow);
+    z-index: -100;
+}
+[data-theme="light"] .blur {
+    display: none;
+}
+
+.container-left {
+    text-align: left;
+    width: 100%;
+}
+.span-name{
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px var(--text-primary);
+}
+.atype{
+    color: var(--accent);
+}
+
+.h1 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: clamp(2.25rem, 8vw, 4rem); /* shrinks smoothly on small screens */
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    overflow-wrap: break-word;
+  }
+.h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-primary);
+    font-size: clamp(1.35rem, 4.5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.5;
+    min-height: 1.5em;
+    margin-bottom: 1rem;
+}
+.about-life{
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    text-align: justify;
+}
+
+.about-image{
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+.about-image img {
+    display: block;
+    border-radius: 50%;
+}
+
+/* button */
+
+
+.btn-small{
+    display: inline-block;
+    background-color: var(--btn-bg);
+    color: #fff;
+    padding: 0.7rem 1.2rem; /* comfortable thumb-sized target */
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.btn{
+    background-color: var(--btn-bg);
+    color: white;
+    border-radius: 100px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Hover only on devices with a real mouse — avoids "stuck" hover on phones */
+@media (hover: hover) {
+    .btn:hover,
+    .btn-small:hover {
+        background-color: var(--btn-hover);
+    }
+}
+/*SKILLS */
+.skill-container {
+    margin: auto;
+}
+.title-skill {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.name-skill{
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: clamp(1.9rem, 7vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: 3px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.skill-set{
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.skill-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h3, h4 {
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+}
+.programming {
+    margin-top: 1rem;
+    max-width: 70em;
+    width: 100%;
+}
+.prog-list{
+    padding: auto;
+    position: relative;
+    display: grid;
+    justify-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.prog-img{ 
+    margin: 1rem 0;
+    padding: 5px;
+    width: 75px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* EXPERIENCE */
+.experience {
+    max-width: 900px;
+    margin: auto;
+    padding: 3rem 2rem 5rem;
+}
+.timeline {
+    position: relative;
+    margin-top: 3rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--surface-border);
+}
+.timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+}
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+.timeline-marker {
+    position: absolute;
+    left: -2.45rem;
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--surface);
+}
+.timeline-period {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+.timeline-role {
+    font-size: 1.15rem;
+    margin-bottom: 0.15rem;
+}
+.timeline-company {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+.timeline-list {
+    color: var(--text-muted);
+    font-family: 'Poppins', sans-serif;
+}
+.timeline-list li {
+    list-style: disc;
+    margin-left: 1.2rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.5rem;
+}
+.timeline-item:nth-child(2) { transition-delay: .1s; }
+.timeline-item:nth-child(3) { transition-delay: .2s; }
+.timeline-item:nth-child(4) { transition-delay: .3s; }
+
+/* PORTFOLIO */
+.portfolio{
+    flex: 1;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+
+.port-content{
+    margin-top: 4rem;
+    display: grid;
+    /* As many 220px+ columns as fit: 1 on phones, 2-3 on tablets, 4 on desktop */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.port-content .port-card{
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border: 2px solid var(--surface-border);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (hover: hover) {
+    .port-content .port-card:hover{
+        background-color: var(--card-hover-bg);
+        border-color: var(--card-hover-border);
+    }
+}
+
+.port-content .port-card span{
+    display: inline-block;
+    background-color: var(--badge-bg);
+    padding: 2px 9px;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color .3s ease;
+}
+.port-content .port-card h3{
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.port-content .port-card p{
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.port-content .port-card:nth-child(2) { transition-delay: .1s; }
+.port-content .port-card:nth-child(3) { transition-delay: .2s; }
+.port-content .port-card:nth-child(4) { transition-delay: .3s; }
+
+
+/* FOOTER */
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+    padding: 25px;
+    
+}
+.foot{
+    font-size: 16px;
+    font-family: "Outfit", sans-serif;
+    color: var(--foot-color);
+}
+
+  /* CONTACTS */
+#contact {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 2rem 5rem;
+}
+
+.contact-wrap {
+    width: 100%;
+    max-width: 1000px;
+    margin: 1rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: background-color .3s ease, border-color .3s ease;
+}
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+}
+.form-row label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+.form-row input,
+.form-row textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    color: var(--input-text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* 16px+ stops iPhones auto-zooming when you tap a field */
+    resize: vertical;
+    transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+.form-row input:focus,
+.form-row textarea:focus {
+    border-color: var(--accent);
+}
+.contact-form .btn {
+    align-self: flex-start;
+}
+.form-status {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+}
+.form-status.success { color: var(--success); }
+.form-status.error { color: var(--error); }
+  
+.contact-info-upper-container{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 2rem;
+  border: 0.1rem solid var(--surface-border);
+  background: var(--surface);
+  margin: 0 auto;
+  padding: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color .3s ease, border-color .3s ease;
+}
+
+.contact-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.5rem 1rem;
+    padding: 0.4rem 0;
+    min-height: 44px;
+    color: var(--text-primary);
+  }
+  
+.contact-label {
+    font-size: larger;
+    overflow-wrap: anywhere; /* long email address wraps instead of overflowing */
+    transition: color .3s ease;
+  }
+  
+.contact-icon {
+    cursor: default;
+  }
+.email-icon {
+    height: 2.5rem;
+  }
+.contact-icon-font {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--text-primary);
+    transition: color .3s ease;
+  }
+
+@media (hover: hover) {
+  .contact-info-container:hover .contact-label {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    text-decoration-color: rgb(181, 181, 181);
+  }
+}
+
+/* BACK TO TOP */
+.back-to-top {
+    position: fixed;
+    right: 1.5rem;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); /* clears the iPhone home bar */
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: var(--btn-bg);
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity .3s ease, transform .3s ease, background-color .3s ease;
+    z-index: 5;
+}
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+@media (hover: hover) {
+    .back-to-top:hover {
+        background-color: var(--btn-hover);
+    }
+}
+
+/* SCROLL REVEAL — only hides content when JavaScript is running,
+   so the page is never blank if a script fails to load */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+.js .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .back-to-top,
+    .theme-toggle,
+    .logo,
+    .port-content .port-card,
+    .form-row input,
+    .form-row textarea {
+        transition: none;
+    }
+}
+
+  /* REUSABLE */
+  .nav-container {
+    max-width: 80em;
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+.split {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+  }
+
+
+  
+
+/* =========================================================
+   RESPONSIVE / MEDIA QUERIES
+   Breakpoints:
+     ≤ 799px   phones & small tablets  -> hamburger menu
+     800-1199  tablets & small laptops -> inline menu, compact
+     ≥ 1200px  desktop                 -> full-size menu
+   ========================================================= */
+
+/* ---------- Tablet & desktop (inline navigation) ---------- */
+@media (min-width: 800px) {
+
+    /* NAVBAR */
+    .hamburger {
+      display: none;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    .nav-ul {
+      position: static;
+      flex-direction: row;
+      background-color: transparent;
+      height: auto;
+      justify-content: flex-end;
+      transition: none;
+    }
+    .nav-li {
+      font-size: 1.15rem;
+      margin-left: 1.25em;
+      white-space: nowrap;
+    }
+    .logo {
+      font-size: 1.75rem;
+    }
+    .nav-a {
+      position: relative;
+    }
+    .nav-a::before {
+      content: '';
+      width: 0%;
+      position: absolute;
+      height: 3px;
+      background-color: var(--accent-line);
+      bottom: -2px;
+      transition: 0.3s ease;
+    }
+    .nav-a:hover::before,
+    .nav-a:focus-visible::before {
+       width: 100%;
+    }
+    .theme-toggle {
+      position: static;
+      transform: none;
+      margin-left: 1.25em;
+      flex-shrink: 0;
+    }
+
+    /* ABOUT ME */
+    .split {
+      flex-direction: row;
+    }
+    .container-left {
+      width: 50%;
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .contact-form {
+      flex: 1;
+    }
+    .contact-info-upper-container {
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+}
+
+/* ---------- Full desktop: original larger sizes ---------- */
+@media (min-width: 1200px) {
+    .nav-li {
+      font-size: 1.5rem;
+      margin-left: 2em;
+    }
+    .logo {
+      font-size: 2.25rem;
+    }
+    .theme-toggle {
+      margin-left: 1.5em;
+    }
+    .container-left {
+      width: 40%;
+    }
+}
+
+/* ---------- Phones & small tablets ---------- */
+@media (max-width: 799px) {
+    /* Compact header that stays at the top while scrolling,
+       so the menu is always one tap away */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--nav-bg);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      transition: background-color .3s ease;
+    }
+    .nav-container {
+      padding: 0.25rem 0;
+    }
+    .logo-wrap {
+      text-align: left;
+      padding: 0.9rem 6.5rem 0.9rem 0; /* leave room for the toggle + burger */
+    }
+    .logo {
+      font-size: 1.5rem;
+    }
+    .theme-toggle {
+      right: 3.75rem;
+    }
+    .hamburger {
+      right: 0.5rem;
+    }
+    .nav-li {
+      font-size: 1.75rem;
+    }
+    .nav-a {
+      display: inline-block;
+      padding: 0.5rem 1.5rem; /* easy to tap */
+    }
+
+    /* Anchor links land below the sticky header, not under it */
+    section {
+      scroll-margin-top: 4.5rem;
+    }
+
+    .container-about {
+      padding: 2rem 1.25rem 3rem;
+    }
+    .about-life {
+      text-align: left;
+      line-height: 1.6;
+    }
+    .about-image {
+      max-width: 320px;
+    }
+    .experience,
+    .portfolio {
+      padding: 3rem 1.25rem;
+    }
+    #contact {
+      padding: 2rem 1.25rem 5rem;
+    }
+    .port-content {
+      margin-top: 2rem;
+      gap: 1.25rem;
+    }
+    .timeline {
+      padding-left: 1.5rem;
+    }
+    .timeline-marker {
+      left: -1.95rem;
+    }
+    .contact-form {
+      padding: 1.5rem 1.25rem;
+    }
+    .contact-form .btn {
+      align-self: stretch; /* full-width send button on phones */
+    }
+    .prog-img {
+      width: 64px;
+      height: 52px;
+      margin: 0.5rem 0;
+    }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 420px) {
+    .btn {
+      display: block;
+      font-size: 1.05rem;
+    }
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      font-size: 0.95rem;
+    }
+    .contact-info-upper-container {
+      width: 100%;
+    }
+    .contact-label {
+      font-size: 1rem;
+    }
+}
+
+</style>
+    <link rel="icon" href="images/k.png">
 </head>
 <body>
     <!-- Header -->
     <header class="head" id="portfolio">
         <div class="nav-container">
-        <nav>
-            <div class="logo-wrap slide-left">
+        <nav aria-label="Main">
+            <div class="logo-wrap">
               <a href="#portfolio" class="logo">KENNARDTROY</a>
             </div>
             <div class="nav-right">
-              <ul class="nav-ul slide-right">
+              <ul class="nav-ul" id="navMenu">
                 <li class="nav-li"><a href="#about" class="nav-a">about</a></li>
                 <li class="nav-li"><a href="#experience" class="nav-a">experience</a></li>
                 <li class="nav-li"><a href="#skills" class="nav-a">skills</a></li>
                 <li class="nav-li"><a href="#portfolios" class="nav-a">portfolio</a></li>
                 <li class="nav-li"><a href="#contact" class="nav-a">contact</a></li>
               </ul>
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">
-                <i class="ri-moon-line" id="themeIcon"></i>
+              <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+                <i class="ri-moon-line" id="themeIcon" aria-hidden="true"></i>
               </button>
             </div>
-            <div class="hamburger">
+            <button type="button" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
               <span class="bar"></span>
               <span class="bar"></span>
               <span class="bar"></span>
-            </div>
+            </button>
           </nav>
         </div>
     </header>
+
+    <main>
     <!-- About -->
-    <section class="container-about">
+    <section class="container-about" id="about">
         <span class="blur"></span>
         <span class="blur"></span>
         <div class="split">
             <div class="container-left reveal">
                 <h1 class="h1"><span class="span-name">KENNARD TROY</span> SANCHEZ</h1>
-                <h2 class="h2">I'm <span class="auto-typed atype"></span></h2>
+                <p class="h2">I'm <span class="auto-typed atype"></span></p>
                 <p class="about-life">
                     Greetings! I'm a passionate self-taught programmer hailing from the vibrant city of Manila in the Philippines. My programming journey began with JavaScript and has since evolved to encompass an array of its associated frameworks, including Node.js, Express, and React. In parallel, I've delved into the world of Python programming, constantly enriching my knowledge and skills.
-<br>
-Below, you'll find a comprehensive list of the technologies I'm proficient in, along with some notable projects that showcase my capabilities.</p>
+                    <br>
+                    Below, you'll find a comprehensive list of the technologies I'm proficient in, along with some notable projects that showcase my capabilities.
+                </p>
                 <a class="btn" href="assets/Kennard_Troy_Sanchez_CV.pdf" download="Kennard_Troy_Sanchez_CV.pdf">DOWNLOAD CV</a>
             </div>
             <div class="container-right split">
                 <div class="about-image">
-                    <img src="images/ken2.jpg" class="picKo" alt="Kennard Troy Sanchez">
+                    <img src="images/ken2.jpg" class="picKo" alt="Kennard Troy Sanchez" fetchpriority="high">
+                </div>
             </div>
         </div>
-    </div>
     </section>
+
     <!-- Experience -->
     <section class="experience" id="experience">
         <div class="title-skill">
@@ -83,7 +1019,7 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="timeline-period">Current</span>
-                    <h4 class="timeline-role">Senior Finance Admin Assistant</h4>
+                    <h3 class="timeline-role">Senior Finance Admin Assistant</h3>
                     <p class="timeline-company">UPS</p>
                     <ul class="timeline-list">
                         <li>Handling manual billing.</li>
@@ -94,7 +1030,7 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="timeline-period">Sept 2025 – Feb 2026</span>
-                    <h4 class="timeline-role">Customer Service Representative </h4>
+                    <h3 class="timeline-role">Customer Service Representative</h3>
                     <p class="timeline-company">International Flavors &amp; Fragrances</p>
                     <ul class="timeline-list">
                         <li>Managed end-to-end Order to Cash for B2B domestic, export, and consignment orders — sales order entry, invoicing, and delivery follow-up.</li>
@@ -107,7 +1043,7 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="timeline-period">Jul 2024 – May 2025</span>
-                    <h4 class="timeline-role">Senior Representative, Real-Time Analytics Management</h4>
+                    <h3 class="timeline-role">Senior Representative, Real-Time Analytics Management</h3>
                     <p class="timeline-company">Concentrix</p>
                     <ul class="timeline-list">
                         <li>Supported workforce management for a US insurance client — scheduling, real-time monitoring, and manpower allocation.</li>
@@ -120,7 +1056,7 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="timeline-period">Apr 2023 – Jan 2024</span>
-                    <h4 class="timeline-role">Research Analyst (Hybrid)</h4>
+                    <h3 class="timeline-role">Research Analyst (Hybrid)</h3>
                     <p class="timeline-company">FactSet Research Systems</p>
                     <ul class="timeline-list">
                         <li>Analyzed public and private companies globally, maintaining accurate Business Industry Classification data.</li>
@@ -131,113 +1067,104 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
             </div>
         </div>
     </section>
-    <!-- skills -->
+
+    <!-- Skills -->
     <section class="skill-container" id="skills">
         <div class="title-skill">
             <h2 class="name-skill">PROFESSIONAL SKILL</h2>
         </div>
         <div class="skill-set">
             <div class="skill-category reveal">
-                <h4 class="skill-h4">Programming Languages</h4>
+                <h3 class="skill-h4">Programming Languages</h3>
                 <div class="programming">
                     <div class="prog-list">
                         <div>
-                            <img src="images/CSS3_logo_and_wordmark.svg.png" class="prog-img" alt="CSS3">
-                            <img src="images/html.png" class="prog-img" alt="HTML5">
-                            <img src="images/javascript-1.svg" class="prog-img" alt="JavaScript">
-                            <img src="images/React-icon.svg.png" class="prog-img" alt="React">
+                            <img src="images/CSS3_logo_and_wordmark.svg.png" class="prog-img" alt="CSS3" loading="lazy">
+                            <img src="images/html.png" class="prog-img" alt="HTML5" loading="lazy">
+                            <img src="images/javascript-1.svg" class="prog-img" alt="JavaScript" loading="lazy">
+                            <img src="images/React-icon.svg.png" class="prog-img" alt="React" loading="lazy">
                         </div>
                         <div>
-                            <img src="images/node-js-javascript-web-application-express-js-computer-software-others.jpg" class="prog-img" alt="Node.js">
-                            <img src="images/Python-logo-notext.svg.png" 
-                            class="prog-img" alt="Python">
-                            <img src="images/sass.png" class="prog-img" alt="Sass">
-                            <img src="images/VB.NET_Logo.svg.png" class="prog-img" alt="VB.NET">
+                            <img src="images/node-js-javascript-web-application-express-js-computer-software-others.jpg" class="prog-img" alt="Node.js" loading="lazy">
+                            <img src="images/Python-logo-notext.svg.png" class="prog-img" alt="Python" loading="lazy">
+                            <img src="images/sass.png" class="prog-img" alt="Sass" loading="lazy">
+                            <img src="images/VB.NET_Logo.svg.png" class="prog-img" alt="VB.NET" loading="lazy">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="skill-category reveal">
-                <h4 class="skill-h4">Databases</h4>
+                <h3 class="skill-h4">Databases</h3>
                 <div class="prog-list">
                     <div>
-                        <img src="images/mssql.jpg" class="prog-img" alt="MSSQL">
-                        <img src="images/mongodb.png" class="prog-img" alt="MongoDB">
+                        <img src="images/mssql.jpg" class="prog-img" alt="MSSQL" loading="lazy">
+                        <img src="images/mongodb.png" class="prog-img" alt="MongoDB" loading="lazy">
                     </div>
                 </div>
             </div>
             <div class="skill-category reveal">
-                <h4 class="skill-h4">Others</h4>
+                <h3 class="skill-h4">Others</h3>
                 <div class="prog-list">
                     <div>
-                        <img src="images/Tableau-Symbol.png" 
-                        class="prog-img" alt="Tableau">
-                        <img src="images/vsc.png" class="prog-img" alt="VS Code">
-                        <img src="images/GitHub_Invertocat_Logo.svg" class="prog-img" alt="GitHub">
+                        <img src="images/Tableau-Symbol.png" class="prog-img" alt="Tableau" loading="lazy">
+                        <img src="images/vsc.png" class="prog-img" alt="VS Code" loading="lazy">
+                        <img src="images/GitHub_Invertocat_Logo.svg" class="prog-img" alt="GitHub" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Portfolio -->
     <section id="portfolios" class="portfolio">
         <h2 class="name-skill">PORTFOLIO</h2>
         <div class="port-content">
             <div class="port-card reveal">
-                <span><i class="ri-double-quotes-l"></i></span>
-                <h4>Quote Generator</h4>
-                <p>
-                    A Basic Quote Generator. Using, HTML, CSS, and Javascript. 
-                </p>
-                <button class="btn-small" id="quote">Click here</button>
+                <span><i class="ri-double-quotes-l" aria-hidden="true"></i></span>
+                <h3>Quote Generator</h3>
+                <p>A basic quote generator built with HTML, CSS, and JavaScript.</p>
+                <a class="btn-small" href="https://imjavahater.github.io/kntquotegen.github.io/" target="_blank" rel="noopener">View project</a>
             </div>
             <div class="port-card reveal">
-                <span><i class="ri-bit-coin-line"></i></span>
-                <h4>KENDRYPTO</h4>
-                <p>
-                    Interactive Crypto website. It has Basic Burger function and slide effects. 
-                </p>
-                <button class="btn-small" id="crypto">Click here</button>
+                <span><i class="ri-bit-coin-line" aria-hidden="true"></i></span>
+                <h3>KENDRYPTO</h3>
+                <p>Interactive crypto website with a burger menu and slide effects.</p>
+                <a class="btn-small" href="https://imjavahater.github.io/interactive-crypto-web/" target="_blank" rel="noopener">View project</a>
             </div>
             <div class="port-card reveal">
-                <span><i class="ri-palette-line"></i></span>
-                <h4>Color Flipper</h4>
-                <p>
-                    An Functional Website that changes the background color. 
-                </p>
-                <button class="btn-small" id="col-flip">Click here</button>
+                <span><i class="ri-palette-line" aria-hidden="true"></i></span>
+                <h3>Color Flipper</h3>
+                <p>A functional website that changes the background color.</p>
+                <a class="btn-small" href="https://imjavahater.github.io/color-flipper/" target="_blank" rel="noopener">View project</a>
             </div>
             <div class="port-card reveal">
-                <span><i class="ri-loop-right-line"></i></span>
-                <h4>Infinite scroll API</h4>
-                <p>
-                    API linked website shows random awesome images.  
-                </p>
-                <button class="btn-small" id="infi-scroll">Click here</button>
+                <span><i class="ri-loop-right-line" aria-hidden="true"></i></span>
+                <h3>Infinite Scroll API</h3>
+                <p>API-linked website that shows random awesome images.</p>
+                <a class="btn-small" href="https://imjavahater.github.io/js-infnt-scrl/" target="_blank" rel="noopener">View project</a>
             </div>
             <div class="port-card reveal">
-                <span><i class="ri-loop-right-line"></i></span>
-                <h4>RPS Game</h4>
-                <p>
-                    Interactive Rock-Paper-Scissor Game embedded in HTML with small javascipt code. 
-                </p>
-                <button class="btn-small" id="rps-game">Click here</button>
+                <span><i class="ri-gamepad-line" aria-hidden="true"></i></span>
+                <h3>RPS Game</h3>
+                <p>Interactive Rock-Paper-Scissors game built with HTML and a small JavaScript program.</p>
+                <a class="btn-small" href="https://imjavahater.github.io/RPS---Game/" target="_blank" rel="noopener">View project</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Me -->
     <section id="contact">
-        <h1 class="name-skill">CONTACT</h1>
+        <h2 class="name-skill">CONTACT</h2>
         <div class="contact-wrap">
+            <!-- Replace YOUR_FORM_ID with your Formspree form ID (see README) -->
             <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-row">
                     <label for="cf-name">Name</label>
-                    <input type="text" id="cf-name" name="name" required>
+                    <input type="text" id="cf-name" name="name" autocomplete="name" required>
                 </div>
                 <div class="form-row">
                     <label for="cf-email">Email</label>
-                    <input type="email" id="cf-email" name="email" required>
+                    <input type="email" id="cf-email" name="email" autocomplete="email" inputmode="email" required>
                 </div>
                 <div class="form-row">
                     <label for="cf-message">Message</label>
@@ -246,62 +1173,245 @@ Below, you'll find a comprehensive list of the technologies I'm proficient in, a
                 <button type="submit" class="btn" id="cf-submit">SEND MESSAGE</button>
                 <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             </form>
-            <div class="contact-info-upper-container reveal">
-              <div class="contact-info-container">
-                <img
-                  src="images/email.png"
-                  alt="Email icon"
-                  class="icon contact-icon email-icon"
-                />
-                <a href="mailto:sanchez.kent0411@gmail.com"><p>sanchez.kent0411@gmail.com</p></a>
-              </div>
-              <div class="contact-info-container">
-                <img
-                  src="images/linkedin.png"
-                  alt="LinkedIn icon"
-                  class="icon contact-icon email-icon"
-                />
-                <p id="linkedin">LinkedIn</p>
-              </div>
-              <div class="contact-info-container">
-                <img
-                  src="images/medium.png"
-                  alt="Medium icon"
-                  class="icon contact-icon email-icon"
-                />
-                <p id="medium">Medium</p>
-              </div>
-              <div class="contact-info-container">
-                <img
-                  src="images/GitHub_Invertocat_Logo.svg"
-                  alt="github icon"
-                  class="icon contact-icon email-icon"
-                />
-                <p id="github">GitHub</p>
-              </div>
-              <div class="contact-info-container">
-                <i class="ri-facebook-circle-fill icon contact-icon contact-icon-font"></i>
-                <p id="facebook">Facebook</p>
-              </div>
-              <div class="contact-info-container">
-                <i class="ri-instagram-fill icon contact-icon contact-icon-font"></i>
-                <p id="instagram">Instagram</p>
-              </div>
-            </div>
+            <ul class="contact-info-upper-container reveal">
+              <li>
+                <a class="contact-info-container" href="mailto:sanchez.kent0411@gmail.com">
+                  <img src="images/email.png" alt="" class="contact-icon email-icon" loading="lazy">
+                  <span class="contact-label">sanchez.kent0411@gmail.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact-info-container" href="https://www.linkedin.com/in/ktsanchez/" target="_blank" rel="noopener">
+                  <img src="images/linkedin.png" alt="" class="contact-icon email-icon" loading="lazy">
+                  <span class="contact-label">LinkedIn</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact-info-container" href="https://medium.com/@troysanchez" target="_blank" rel="noopener">
+                  <img src="images/medium.png" alt="" class="contact-icon email-icon" loading="lazy">
+                  <span class="contact-label">Medium</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact-info-container" href="https://github.com/imjavahater" target="_blank" rel="noopener">
+                  <img src="images/GitHub_Invertocat_Logo.svg" alt="" class="contact-icon email-icon" loading="lazy">
+                  <span class="contact-label">GitHub</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact-info-container" href="https://www.facebook.com/fghjkenl/" target="_blank" rel="noopener">
+                  <i class="ri-facebook-circle-fill contact-icon contact-icon-font" aria-hidden="true"></i>
+                  <span class="contact-label">Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact-info-container" href="https://www.instagram.com/ysk_kenn/" target="_blank" rel="noopener">
+                  <i class="ri-instagram-fill contact-icon contact-icon-font" aria-hidden="true"></i>
+                  <span class="contact-label">Instagram</span>
+                </a>
+              </li>
+            </ul>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <p class="foot">All Rights Reserved. Kennard Troy Sanchez © <span id="year"></span></p>
     </footer>
 
-    <button id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
-        <i class="ri-arrow-up-line"></i>
+    <button type="button" id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="ri-arrow-up-line" aria-hidden="true"></i>
     </button>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS (defer = download in parallel, run after the page is parsed) -->
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-  <script src="script.js"></script>
+  <script>
+// =========================================================
+// Small helpers so the site never breaks if storage is blocked
+// (e.g. some private-browsing modes)
+// =========================================================
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
+}
+
+// =========================================================
+// AUTO-TYPE (Typed.js). If the library fails to load
+// (ad blocker, slow network), show plain text instead of crashing.
+// =========================================================
+const typedTarget = document.querySelector('.auto-typed');
+if (window.Typed && typedTarget) {
+  new Typed('.auto-typed', {
+    strings: ['an Analyst.', 'a Programmer.', 'a Writer.', 'a UI Designer.'],
+    typeSpeed: 100,
+    backSpeed: 100,
+    loop: true
+  });
+} else if (typedTarget) {
+  typedTarget.textContent = 'an Analyst.';
+}
+
+// =========================================================
+// MOBILE MENU (hamburger)
+// =========================================================
+const hamburger = document.querySelector('.hamburger');
+const navUl = document.querySelector('.nav-ul');
+
+function setMenu(open) {
+  hamburger.classList.toggle('active', open);
+  navUl.classList.toggle('active', open);
+  document.body.classList.toggle('menu-open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
+hamburger.addEventListener('click', function () {
+  setMenu(!navUl.classList.contains('active'));
+});
+
+// Close the menu after tapping a link
+navUl.querySelectorAll('a').forEach(function (link) {
+  link.addEventListener('click', function () { setMenu(false); });
+});
+
+// Close with the Escape key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && navUl.classList.contains('active')) {
+    setMenu(false);
+    hamburger.focus();
+  }
+});
+
+// If the screen is rotated / resized to desktop width, reset the menu
+window.matchMedia('(min-width: 800px)').addEventListener('change', function (e) {
+  if (e.matches) setMenu(false);
+});
+
+// Portfolio + contact links are now normal <a href> links in index.html,
+// so they no longer need JavaScript to open.
+
+// =========================================================
+// THEME TOGGLE (dark / light, remembered between visits)
+// =========================================================
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const rootEl = document.documentElement;
+const themeColorMeta = document.querySelectorAll('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  if (isLight) {
+    rootEl.setAttribute('data-theme', 'light');
+  } else {
+    rootEl.removeAttribute('data-theme');
+  }
+  themeIcon.className = isLight ? 'ri-sun-line' : 'ri-moon-line';
+  // Keep the phone's browser bar the same color as the header
+  themeColorMeta.forEach(function (m) {
+    m.setAttribute('content', isLight ? '#ffffff' : '#0c1c55');
+  });
+}
+
+const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+applyTheme(safeGet('kts-theme') || (prefersLight ? 'light' : 'dark'));
+
+themeToggle.addEventListener('click', function () {
+  const next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+  safeSet('kts-theme', next);
+});
+
+// =========================================================
+// SCROLL REVEAL
+// =========================================================
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function (el) { observer.observe(el); });
+} else {
+  revealEls.forEach(function (el) { el.classList.add('visible'); });
+}
+
+// =========================================================
+// BACK TO TOP
+// =========================================================
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function () {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true }); // passive = smoother scrolling on phones
+
+backToTop.addEventListener('click', function () {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// =========================================================
+// FOOTER YEAR
+// =========================================================
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
+// =========================================================
+// CONTACT FORM (Formspree)
+// Until you add a real Formspree ID in index.html, the form falls
+// back to opening the visitor's email app with the message filled in.
+// =========================================================
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const MY_EMAIL = 'sanchez.kent0411@gmail.com';
+
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('cf-submit');
+    const data = new FormData(contactForm);
+
+    if (contactForm.action.indexOf('YOUR_FORM_ID') !== -1) {
+      const subject = encodeURIComponent('Portfolio message from ' + data.get('name'));
+      const body = encodeURIComponent(data.get('message') + '\n\n— ' + data.get('name') + ' (' + data.get('email') + ')');
+      window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + subject + '&body=' + body;
+      return;
+    }
+
+    submitBtn.disabled = true;
+    formStatus.textContent = 'Sending...';
+    formStatus.className = 'form-status';
+
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (response) {
+        if (response.ok) {
+          formStatus.textContent = 'Thanks! Your message is on its way.';
+          formStatus.className = 'form-status success';
+          contactForm.reset();
+        } else {
+          throw new Error('Bad response');
+        }
+      })
+      .catch(function () {
+        formStatus.textContent = 'Something went wrong — please email me directly at ' + MY_EMAIL + '.';
+        formStatus.className = 'form-status error';
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+      });
+  });
+}
+
+</script>
 </body>
 </html>
