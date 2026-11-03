@@ -5,7 +5,7 @@
 
 // 1) After deploying the Worker, paste its address here (see chatbot-worker/README.md).
 //    While it still says YOUR-SUBDOMAIN, the chat button stays hidden.
-const CHAT_API_URL = 'imjavahater.workers.dev';
+const CHAT_API_URL = 'https://kts-portfolio-chatbot.imjavahater.workers.dev';
 
 const CHAT_STORAGE_KEY = 'kts-chat';
 const CHAT_MAX_CHARS = 1000;
